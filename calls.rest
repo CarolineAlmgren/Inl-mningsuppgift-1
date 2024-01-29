@@ -1,0 +1,9 @@
+### Get all
+GET http://localhost:3000/api/rockbands
+
+### Get single
+GET http://localhost:3000/api/rockbands/1
+
+### Create new
+POST http://localhost:3000/api/rockbands
+Content-Type: application/json; charset=utf-8
