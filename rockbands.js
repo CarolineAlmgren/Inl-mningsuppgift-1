@@ -32,4 +32,4 @@ const rockbands = [{
 }
 ];
 
-module.exports = { rockbands };
+module.exports = rockbands;
