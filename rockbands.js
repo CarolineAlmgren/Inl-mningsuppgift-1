@@ -29,7 +29,16 @@ const rockbands = [{
     from: "Australia",
     founded:1973,
     albums:17
-}
-];
+},{
+    name: "Artic Monkeys",
+    from: "England",
+    founded:2002,
+    albums:6
+},{
+    name: "Caesars",
+    from: "Sweden",
+    founded:1995,
+    albums:5
+}];
 
 module.exports = rockbands;
