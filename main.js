@@ -1,14 +1,15 @@
-/*const express = require("express");
+const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 3100;*/
-//const rockbands = require("./rockbands");
+const port = 3100;
 const readline = require("readline/promises");
 const { stdin: input, stdout: output } = require("process");
 const rl = readline.createInterface({ input, output });
 const { sequelize, RockBand } = require("./models");
 const migrationhelper = require("./migrationhelper");
 //const Rockband = require('./models/rockband');
+
+app.use(cors());
 
 async function listAll() {
   const rockbands = await RockBand.findAll();
@@ -96,13 +97,12 @@ async function main() {
   main();
 })();
 
-/*app.use(cors());
-
-app.get("/api/rockbands", async (req, res) => { // Ändra här för att använda rockband istället för rockbands
-  const rockbandsList = await rockband.findAll();
+app.get("/api/rockbands", async (req, res) => {
+  // Ändra här för att använda rockband istället för rockbands
+  const rockbandsList = await RockBand.findAll();
   res.json(rockbandsList);
 });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-});*/
+});
