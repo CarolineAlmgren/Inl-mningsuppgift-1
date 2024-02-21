@@ -9,6 +9,7 @@ const { sequelize, RockBand } = require("./models");
 const migrationhelper = require("./migrationhelper");
 //const Rockband = require('./models/rockband');
 
+app.use(express.json());
 app.use(cors());
 
 async function listAll() {
