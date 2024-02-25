@@ -104,6 +104,23 @@ app.get("/api/rockbands", async (req, res) => {
   res.json(rockbandsList);
 });
 
+
+// POST-rutt för att skapa ett nytt band
+app.post("/api/rockbands", async (req, res) => {
+    const { name, from, founded, albums } = req.body;
+
+    // Här skapas det nya bandet i databasen
+    const newBand = await RockBand.create({
+      name: name,
+      from: from,
+      founded: founded,
+      albums: albums,
+    
+    });
+    // Returnera det nya bandet som JSON-svar
+    res.status(201).json(newBand);
+  })
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
