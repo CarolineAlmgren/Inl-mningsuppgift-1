@@ -1,9 +1,12 @@
 ### Get all
-GET http://localhost:3000/api/rockbands
+GET http://localhost:3100/api/rockbands
 
 ### Get single
-GET http://localhost:3000/api/rockbands/1
+GET http://localhost:3100/api/rockbands/1
 
 ### Create new
-POST http://localhost:3000/api/rockbands
+POST http://localhost:3100/api/rockbands
 Content-Type: application/json; charset=utf-8
+
+### Sort
+GET http://localhost:3100/api/rockbands?q=ur&sortOrder=desc

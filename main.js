@@ -7,11 +7,57 @@ const { stdin: input, stdout: output } = require("process");
 const rl = readline.createInterface({ input, output });
 const { sequelize, RockBand } = require("./models");
 const migrationhelper = require("./migrationhelper");
+const { check, validationResult } = require('express-validator');
+const { Op } = require('sequelize');
 //const Rockband = require('./models/rockband');
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin:"http://localhost:5500",
+  credentials:true 
+}))
 
+
+app.get('/api/rockbands', check('q').escape() , async(req,res)=>{
+  //console.log(req.query.sortCol)
+  //console.log(req.query.sortOrder)
+  const sortCol =  req.query.sortCol || 'id';
+  const sortOrder =  req.query.sortOrder || 'asc';
+  const q = req.query.q ||'';
+  const offset =  Number(req.query.offset || 0);
+  const limit =  Number(req.query.limit || 20);
+  // if(req.query.sortCol === undefined){
+  //     sortCol = 'id'
+  // }else{
+  //     sortCol = req.query.sortCol
+  // }
+
+  const allBands = await RockBand.findAll({
+      where:{
+          name:{
+             [Op.like]: '%' + q + '%'
+          }
+      },
+      order: [ 
+          [sortCol, sortOrder]
+       ],
+       offset: offset,
+       limit: limit
+  })
+  const result = allBands.map(p=>{
+      return {
+         id: p.id,
+         name: p.name,
+         from: p.from,
+         founded: p.founded,
+         albums: p.albums
+     }
+  })
+  return res.json(result)
+})
+
+
+//I terminalen
 async function listAll() {
   const rockbands = await RockBand.findAll();
   for (const bnd of rockbands) {
@@ -102,6 +148,11 @@ app.get("/api/rockbands", async (req, res) => {
   // Ändra här för att använda rockband istället för rockbands
   const rockbandsList = await RockBand.findAll();
   res.json(rockbandsList);
+});
+
+app.get('/api/rockbands/:id', async (req, res) => {
+  const bandId = req.params.id;
+  return res.json(bandId)
 });
 
 
