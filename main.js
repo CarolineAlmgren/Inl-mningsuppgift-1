@@ -19,13 +19,12 @@ app.use(cors({
 
 
 app.get('/api/rockbands', check('q').escape() , async(req,res)=>{
-  //console.log(req.query.sortCol)
-  //console.log(req.query.sortOrder)
-  const sortCol =  req.query.sortCol || 'id';
+  const sortCol =  req.query.sortCol || 'name';
   const sortOrder =  req.query.sortOrder || 'asc';
   const q = req.query.q ||'';
   const offset =  Number(req.query.offset || 0);
-  const limit =  Number(req.query.limit || 20);
+  const limit =  Number(req.query.limit || 10);
+
   // if(req.query.sortCol === undefined){
   //     sortCol = 'id'
   // }else{
@@ -143,18 +142,6 @@ async function main() {
 (async () => {
   main();
 })();
-
-app.get("/api/rockbands", async (req, res) => {
-  // Ändra här för att använda rockband istället för rockbands
-  const rockbandsList = await RockBand.findAll();
-  res.json(rockbandsList);
-});
-
-app.get('/api/rockbands/:id', async (req, res) => {
-  const bandId = req.params.id;
-  return res.json(bandId)
-});
-
 
 // POST-rutt för att skapa ett nytt band
 app.post("/api/rockbands", async (req, res) => {
