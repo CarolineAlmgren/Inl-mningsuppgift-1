@@ -8,5 +8,12 @@ GET http://localhost:3100/api/rockbands/1
 POST http://localhost:3100/api/rockbands
 Content-Type: application/json; charset=utf-8
 
+{
+    "name": "hejhej",
+    "from": "",
+    "founded":"a",
+    "albums":"a"
+}
+
 ### Sort
 GET http://localhost:3100/api/rockbands?q=ur&sortOrder=desc

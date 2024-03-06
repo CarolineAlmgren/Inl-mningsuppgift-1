@@ -9,7 +9,8 @@ const { sequelize, RockBand } = require("./models");
 const migrationhelper = require("./migrationhelper");
 const { check, validationResult } = require('express-validator');
 const { Op } = require('sequelize');
-//const Rockband = require('./models/rockband');
+const Rockband = require('./models/rockband');
+const { validateCreateBand } = require("./validators/bandvalidator");
 
 app.use(express.json());
 app.use(cors({
@@ -144,7 +145,7 @@ async function main() {
 })();
 
 // POST-rutt för att skapa ett nytt band
-app.post("/api/rockbands", async (req, res) => {
+app.post("/api/rockbands", validateCreateBand, async (req, res) => {
     const { name, from, founded, albums } = req.body;
 
     // Här skapas det nya bandet i databasen
@@ -158,6 +159,13 @@ app.post("/api/rockbands", async (req, res) => {
     // Returnera det nya bandet som JSON-svar
     res.status(201).json(newBand);
   })
+   // ge ett band
+  app.get('/api/rockbands/:id', async (req, res) => {
+    
+      const rockBand = await RockBand.findOne({ _id: req.params.id });
+      res.send(rockBand);
+    }
+  );
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
