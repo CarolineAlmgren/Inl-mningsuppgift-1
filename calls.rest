@@ -17,3 +17,14 @@ Content-Type: application/json; charset=utf-8
 
 ### Sort
 GET http://localhost:3100/api/rockbands?q=ur&sortOrder=desc
+
+### Update
+PUT http://localhost:3100/api/rockbands/22
+Content-Type: application/json; charset=utf-8
+
+{
+    "name": "Kiss",
+    "from": "USA",
+    "founded": "1973",
+    "albums": "20"
+}

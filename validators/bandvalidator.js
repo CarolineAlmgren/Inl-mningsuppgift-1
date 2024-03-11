@@ -18,7 +18,6 @@ const validateCreateBand = [
       .trim()
       .isNumeric()
       .withMessage('Founded must be a number!')
-      .not()
       .isLength({min: 4})
       .withMessage('Minimum 4 numbers required!'),
     check('albums')
@@ -27,7 +26,7 @@ const validateCreateBand = [
       .withMessage('Albums must be a number!')
       .not()
       .isEmpty()
-      .withMessage('From can not be empty!'),
+      .withMessage('Albums can not be empty!'),
   
     (req, res, next) => {
       const errors = validationResult(req);
